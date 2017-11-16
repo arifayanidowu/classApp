@@ -1,12 +1,12 @@
 <?php
 	
-	define('DBNAME', 'classapp'); /*THIS IS A CONSTANT AND THIS IS HOW TO DEFINE IT*/
+	define('DBNAME', 'store'); /*THIS IS A CONSTANT AND THIS IS HOW TO DEFINE IT*/
 	define('DBUSER', 'root');/*THIS IS DONE TO PROTECT OUR CONNECTION STRING FROM ATTACKERS*/
 	define('DBPASS', 'boss123');
 
 	try{ /*this is to try to catch an error*/
 
-	$conn = new PDO('mysql:host=localhost;dbname'.DBNAME, DBUSER, DBPASS);
+	$conn = new PDO('mysql:host=localhost;dbname='.DBNAME, DBUSER, DBPASS);
 
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 
