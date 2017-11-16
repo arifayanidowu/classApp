@@ -1,6 +1,7 @@
 <?php
 
 	include('functions/function.php');
+	include('includes/function.php');
 	
 	define('MAX_FILE_SIZE', '2097152');
 	$ext = ['image/jpg','image/jpeg','image/png'];
