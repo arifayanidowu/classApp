@@ -25,7 +25,7 @@
 		}
 
 		if(empty($error)){
-			#do database stuff
+			$clean = array_map('trim', $_POST);
 		}
 
 	}
