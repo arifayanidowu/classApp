@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $page_title; ?></title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<title><?php echo $page_title; ?> </title>
+	<link type="text/css" href="styles.css" rel="stylesheet" >
 </head>
 <body>
 	<section>
