@@ -24,6 +24,9 @@
 		if(empty($_POST['email'])){
 			$error['email']= "Please enter your email";
 		}
+		if(doesEmailExist($conn, $_POST['email'])){
+			$error['email'] = "Email already exist";
+		}
 		if(empty($_POST['password'])){
 			$error['password']= "Please enter your password";
 		}
@@ -45,18 +48,27 @@
 		<hr>
 		<form id="register"  action ="register.php" method ="POST">
 			<div>
-				<?php if(isset($error['fname'])){echo '<p class=\"err\">'.$error['fname'].'</p>';} ?>
+				<?php 
+				$data = displayErrors($error, 'fname');
+				echo $data;
+				?>
 				<label>first name:</label>
 				<input type="text" name="fname" placeholder="first name">
 			</div>
 			<div>
-				<?php if(isset($error['lname'])){echo '<p class=\"err\">'.$error['lname'].'</p>';} ?>
+				<?php 
+				$err = displayErrors($error, 'lname');
+				echo $err;
+				?>
 				<label>last name:</label>	
 				<input type="text" name="lname" placeholder="last name">
 			</div>
 
 			<div>
-				<?php if(isset($error['email'])){echo '<p class=\"err\">'.$error['email'].'</p>';} ?>
+				<?php 
+				$err_email = displayErrors($error, 'email');
+				echo $err_email;
+				?>
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>

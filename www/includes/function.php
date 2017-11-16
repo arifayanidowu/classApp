@@ -38,7 +38,7 @@
 
 		$stmt = $dbconn->prepare("SELECT email FROM admin WHERE :e=email");
 
-		$stmt->bindParam(":e" => $email);
+		$stmt->bindParam(":e", $email);
 
 		$stmt->execute();
 		$count = $stmt->rowCount();
@@ -50,6 +50,18 @@
 		return $result;
 	}
 
+	function displayErrors($err, $name){
+		$result = "";
+
+		if(isset($err[$name])){
+			$result = '<p class="err">'.$err[$name].'</p>';
+		}
+
+		return $result;
+	}
+
 
 
 ?>
+
+
