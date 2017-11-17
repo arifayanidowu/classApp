@@ -50,6 +50,7 @@
 		return $result;
 	}
 
+	// validation for input errors
 	function displayErrors($err, $name){
 		$result = "";
 
