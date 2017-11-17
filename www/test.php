@@ -33,9 +33,10 @@
 		if(empty($error)){
 			$msg = uploadFile($_FILES, 'pics', 'uploads/');
 			/*move_uploaded_file($_FILES['pics']['tmp_name'], $destination);*/
-			if($msg[0]){
-				echo $msg[0];
+			if($msg[0]){ // if files have been uploaded
+				echo $msg[0]; // echo true...
 			}
+
 		} else{
 			foreach ($error as $err) {
 				echo $err.'<br>';
