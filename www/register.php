@@ -73,13 +73,13 @@
 				<input type="text" name="email" placeholder="email">
 			</div>
 			<div>
-				<?php if(isset($error['password'])){echo '<p class=\"err\">'.$error['password'].'</p>';} ?>
+				<?php if(isset($error['password'])){echo '<p class="err">'.$error['password'].'</p>';} ?>
 				<label>password:</label>
 				<input type="password" name="password" placeholder="password">
 			</div>
  
 			<div>
-				<?php if(isset($error['pword'])){echo '<p class=\"err\">'.$error['pword'].'</p>';} ?>
+				<?php if(isset($error['pword'])){echo '<p class="err">'.$error['pword'].'</p>';} ?>
 				<label>confirm password:</label>	
 				<input type="password" name="pword" placeholder="password">
 			</div>
