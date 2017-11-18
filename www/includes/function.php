@@ -21,7 +21,7 @@
 	}
 
 	function doAdminRegister($dbconn, $input){
-		$hash = password_hash($input['password'], PASSWORD_BCRYPT);
+		$hash = password_hash($input['password'], PASSWORD_BCRYPT); // this line is to encrypt the password
 		$stmt = $dbconn->prepare("INSERT INTO admin(firstName, lastName, email, hash)
 			VALUES(:f, :l, :e, :h)");
 		$data = [
