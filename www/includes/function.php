@@ -73,6 +73,7 @@
 		while($fetch=$stmt->fetch(PDO::FETCH_ASSOC)){
 			$hash = $fetch['hash'];
 			if(password_verify($password, $hash)){
+				header("location:home.php");
 				$result = true;
 			} else{
 				$result = false;
