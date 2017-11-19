@@ -76,6 +76,8 @@
 				header("location:home.php");
 				$result = true;
 			} else{
+				$msg = "incorrect email/password";
+				header("location:login.php?msg=$msg");
 				$result = false;
 			}
 			return $result;
