@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +14,10 @@
 			<h1>T<span>SSB</span></h1>
 			<nav>
 				<ul class="clearfix">
-					<li><a href="add_category.php" class="selected">add category</a></li>
-					<li><a href="veiw_category.php">view category</a></li>
-					<li><a href="add_products.php">add products</a></li>
-					<li><a href="view_products.php">view products</a></li>
+					<li><a href="add_category.php" <?php curNave('add_category.php') ?>>add category</a></li>
+					<li><a href="view_category.php" <?php curNave('view_category.php') ?>>view category</a></li>
+					<li><a href="add_category.php" <?php curNave('add_category.php') ?>>add category</a></li>
+					<li><a href="view_category.php" <?php curNave('view_category.php') ?>>view category</a></li>
 					<li><a href="logout.php">logout</a></li>
 				</ul>
 			</nav>

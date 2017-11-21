@@ -8,7 +8,7 @@
 
 	include('includes/function.php');
 
-
+	checkLogin();
 
 
 ?>
@@ -24,7 +24,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$data = viewCategory($conn);
+						echo $data;
+
+					?>
           		</tbody>
 			</table>
 		</div>
