@@ -62,7 +62,7 @@
 	}
 
 
-
+/*
 	function validateLogin($dbconn, $email, $password){
 		$result = "";
 
@@ -85,8 +85,36 @@
 		}
 
 
-	}
+	}*/
 
+
+	function adminLogin($dbconn, $input){
+
+		$result = [];
+
+		$stmt = $dbconn->prepare("SELECT * FROM admin WHERE email=:e");
+
+		$stmt->bindParam(":e", $input['email']);
+
+		$stmt->execute();
+
+		$count = $stmt->rowCount();
+		$row = $stmt->fetch(PDO::FETCH_BOTH); // Could also use FETCH_BOTH which fetches both the key and value pair
+
+		/*print_r($count); exit();*/ // To check what values or errors you have exit() is to stop the printing
+
+		if($count != 1 || !password_verify($input['password'], $row['hash'])){ //if it's not equal to 1, it means it did not fetch the email from the database {email does not exist}
+
+		$result[] = false;
+
+		} else{
+			$result[] = true;
+			$result[] = $row;
+		}
+
+		return $result;
+
+	}
 
 
 
