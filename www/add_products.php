@@ -9,35 +9,54 @@
 	include('includes/db.php');
 	
 
-
 	
 	$error = [];
 
+	$stmt = $conn->prepare("SELECT * FROM category");
+	$stmt -> execute();
+
 	if(array_key_exists('add', $_POST)){
 	
-		if(empty($_POST['fname'])){
-			$error['fname']= "Please enter your firstname";
+		if(empty($_POST['title'])){
+			$error['title']= "Please enter Book title";
 		}
-		if(empty($_POST['lname'])){
-			$error['lname']= "Please enter your lastname";
+		if(empty($_POST['author'])){
+			$error['author']= "Please enter book author";
 		}
-		if(empty($_POST['email'])){
-			$error['email']= "Please enter your email";
+
+		$clean = array_map('trim', $_POST);
+
+		if(empty($_POST['price'])){
+			$error['price']= "Please enter book price";
+		} else{
+			$price = numeric($clean['price']);
+
+			if($price){
+				echo "Enter price in digits";
+			}
 		}
-		if(doesEmailExist($conn, $_POST['email'])){
-			$error['email'] = "Email already exist";
+		if(empty($_POST['pub_date'])){
+			$error['pub_date'] = "Select the date of publication";
 		}
-		if(empty($_POST['password'])){
-			$error['password']= "Please enter your password";
+		if(empty($_POST['quantity'])){
+			$error['quantity']= "Enter the quantity available";
+		}else{
+			$quantity = numeric($clean['quantity']);
+			if($quantity){
+				echo "Enter quantity in digits";
+			}
 		}
-		if(empty($_POST['pword'])){
-			$error['pword']= "Please confirm your password";
+		if(empty($_POST['cat_name'])){
+			$error['cat_name']= "Select a category";
 		}
 
 		if(empty($error)){
-			$clean = array_map('trim', $_POST);
+			$row = $stmt->fetch(PDO::FETCH_BOTH);
 
-			doAdminRegister($conn, $clean);
+			$cat_id = $row[0];
+
+			addProduct($conn, $_POST, $cat_id);
+			redirect("add_products.php");
 		}
 
 	}
@@ -46,51 +65,65 @@
 <div class="wrapper">
 		<h1 id="register-label">Add products</h1>
 		<hr>
-		<form id="register"  action ="register.php" method ="POST">
+		<form id="register"  action ="" method ="POST">
 			<div>
 				<?php 
-				$data = displayErrors($error, 'fname');
-				echo $data;
+				$info = displayErrors($error, 'title');
+				echo $info;
 				?>
-				<label>Product:</label>
-				<input type="text" name="fname" placeholder="first name">
+				<label>Title:</label>
+				<input type="text" name="title" placeholder="Title">
 			</div>
 			<div>
 				<?php 
-				$err = displayErrors($error, 'lname');
-				echo $err;
+				$info = displayErrors($error, 'author');
+				echo $info;
 				?>
-				<label>last name:</label>	
-				<input type="text" name="lname" placeholder="last name">
+				<label>Author:</label>	
+				<input type="text" name="author" placeholder="Author">
 			</div>
 
 			<div>
 				<?php 
-				$err_email = displayErrors($error, 'email');
-				echo $err_email;
+				$info = displayErrors($error, 'price');
+				echo $info;
 				?>
-				<label>email:</label>
-				<input type="text" name="email" placeholder="email">
+				<label>Price:</label>
+				<input type="text" name="price" placeholder="Price">
 			</div>
 			<div>
 				<?php 
-				$err_pass = displayErrors($error, 'password');
-				echo $err_pass;
+				$info = displayErrors($error, 'pub_date');
+				echo $info;
 				?>
-				<label>password:</label>
-				<input type="password" name="password" placeholder="password">
+				<label>publication date:</label>
+				<input type="date" name="pub_date" placeholder="Publication date">
 			</div>
  
 			<div>
 				<?php
-				$err_con_pass = displayErrors($error, 'pword');
-				echo $err_con_pass;
+				$info = displayErrors($error, 'quantity');
+				echo $info;
 				?>
-				<label>confirm password:</label>	
-				<input type="password" name="pword" placeholder="password">
+				<label>Quantity:</label>	
+				<input type="text" name="quantity" placeholder="Quantity">
 			</div>
 
-			<input type="submit" name="add" value="Add">
+			<div>
+				
+				<label>Category:</label> 
+				<select name="cat_name">
+					<option>Select Category</option>
+					<?php while($row = $stmt->fetch(PDO::FETCH_BOTH)) { ?>
+					<option value="<?php echo $row['category_name']; ?>">
+						<?php echo $row['category_name']; ?>
+					</option>
+					<?php } ?>
+				</select>
+
+			</div>
+
+			<p><input type="submit" name="add" value="Add"></p>
 		</form>
 	</div>
 

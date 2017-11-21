@@ -208,6 +208,34 @@
 	}
 
 
+	function numeric($input){
+		$result = false;
+
+		if(!is_numeric($input)){
+			$result = true;
+		}
+		return $result;
+	}
+
+	function addProduct($dbconn, $input, $id){
+		$stmt  = $dbconn->prepare("INSERT INTO books(title, author, price, publication_date, quantity, category_id) 
+			VALUES(:t,:a,:p,:pD,:q,:cId)");
+
+		$data = [
+			":t" => $input['title'],
+			":a" => $input['author'],
+			":p" => $input['price'],
+			":pD" => $input['pub_date'],
+			":q" => $input['quantity'],
+			":cId" => $id
+
+		];
+
+		$stmt ->execute($data);
+
+	}
+
+
 
 
 
