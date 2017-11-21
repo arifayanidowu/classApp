@@ -3,11 +3,11 @@
 
 	$page_title = "Add Category";
 	
+	include('includes/function.php');
 	include('includes/dashboard_header.php');
 
 	include('includes/db.php');
 
-	include('includes/function.php');
 
 
 	checkLogin();

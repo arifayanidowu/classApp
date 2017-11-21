@@ -188,11 +188,11 @@
 
 
 	function curNave($page){
-		
-		$curPage = basename($_SERVER('SERVER_NAME'));
+
+		$curPage = basename($_SERVER['SCRIPT_FILENAME']);
 
 		if($curPage == $page){
-			echo 'selected="selected"';
+			echo 'class="selected"';
 		}
 	}
 

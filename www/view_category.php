@@ -1,12 +1,12 @@
 <?php
 	session_start();
 	$page_title = "Admin Dashboard";
-
+	
+	include('includes/function.php');
 	include('includes/dashboard_header.php');
 
 	include('includes/db.php');
 
-	include('includes/function.php');
 
 	checkLogin();
 
