@@ -10,7 +10,7 @@
 
 		$error = [];
 
-		if(array_key_exists('register', $_POST)){
+		if(array_key_exists('login', $_POST)){
 
 			if(empty($_POST['email'])){
 				$error['email'] = "Please enter your email address";
@@ -29,11 +29,13 @@
 					$details = $data[1];
 
 					$_SESSION['admin_id'] = $details['admin_id']; // $details[0] would also work since we used FETCH_BOTH
-					$_SESSION['name'] = $details['firstName'].' '.$details['lastName']; 
+					$_SESSION['name'] = $details['firstName'].' '.$details['lastName'];
 
-					header("Location: home.php");
+					redirect("add_category.php?msg=","Login successful"); 
+					/*header("Location:add_category.php");*/
+
 				} else{
-					header('Location: login.php?msg="Invalid email/password"');
+					header('Location:login.php?msg="Invalid email/password"');
 				}
 
 /*
@@ -56,7 +58,7 @@
 		<h1 id="register-label">Admin Login</h1>
 		<hr>
 		<form id="register"  action ="login.php" method ="POST">
-			<div>
+			<div>			
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>
@@ -65,7 +67,7 @@
 				<input type="password" name="password" placeholder="password">
 			</div>
 
-			<input type="submit" name="register" value="login">
+			<input type="submit" name="login" value="login">
 		</form>
 
 		<h4 class="jumpto">Don't have an account? <a href="register.php">register</a></h4>
