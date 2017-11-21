@@ -196,6 +196,16 @@
 		}
 	}
 
+	function deleteCategory($dbconn, $input){
+		$stmt = $dbconn->prepare("DELETE FROM category WHERE category_name =:catName AND category_id =:catID");
+
+		$data = [
+			":catID" => $input['id'],
+			":catName" => $input['cat_name']
+		];
+
+		$stmt->execute($data);
+	}
 
 
 
