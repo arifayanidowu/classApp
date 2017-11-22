@@ -1,5 +1,6 @@
 <?php
-	
+	session_start();
+
 	$page_title = "Add Products";
 
 	include('includes/function.php');
@@ -8,12 +9,12 @@
 
 	include('includes/db.php');
 	
-	/*checkLogin();*/
-
 	
+
+	checkLogin();
 	$error = [];
 
-	$flag = ['Top-Selling', 'Trending', 'Recently-Viewd'];
+	$flag = ['Top-Selling', 'Trending', 'Recently-Viewed'];
 
 	$stmt = $conn->prepare("SELECT * FROM category");
 	$stmt -> execute();

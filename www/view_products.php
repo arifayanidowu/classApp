@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	
 	$page_title = "Admin Dashboard";
 	
 	include('includes/function.php');

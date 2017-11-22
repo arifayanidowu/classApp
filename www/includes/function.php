@@ -263,11 +263,11 @@
 		$stmt->execute();
 
 		while($row = $stmt->fetch(PDO::FETCH_BOTH)){
-			$result .= '<tr><td>'.$row[1].'<td>';
-			$result .= '<td>'.$row[2].'<td>';
-			$result .= '<td>'.$row[3].'<td>';
-			$result .= '<td>'.$row[5].'<td>';
-			$result .= '<td><img src="'.$row[7].'" height="50" width="50"><td>';
+			$result .= '<tr><td>'.$row[1].'</td>';
+			$result .= '<td>'.$row[2].'</td>';
+			$result .= '<td>'.$row[3].'</td>';
+			$result .= '<td>'.$row[5].'</td>';
+			$result .= '<td><img src="'.$row[7].'" height="50" width="50"></td>';
 			$result .= '<td><a href="edit_products.php?book_id='.$row[0].'">edit</a></td>';
 			$result .= '<td><a href="delete_products.php?book_id='.$row[0].'">delete</a></td></tr>';
 		}
@@ -275,6 +275,39 @@
 		return $result;
 
 	}
+
+
+
+	function getProductById($dbconn,$id){
+
+
+		$stmt = $dbconn->prepare("SELECT * FROM books WHERE book_id =:bookId");
+
+		$stmt->bindParam(':bookId',$id);
+
+		$stmt->execute();
+
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+		return $row;
+	}
+
+
+	function updateProduct($dbconn, $input){
+
+		$stmt = $dbconn->prepare("UPDATE book SET title =:t, author=:a, publication_date=:pd, WHERE book_id =:bID AND title =:t");
+
+		$data = [
+			":t" => $input['title'],
+			":bID" => $input['id'],
+			":a" => $input['author'],
+			":pd" => $input['pub_date']
+		];
+
+		$stmt->execute($data);
+	}
+
+
 
 
 
