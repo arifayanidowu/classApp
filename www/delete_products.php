@@ -1,31 +1,18 @@
 <?php
-	session_start();
+        session_start();
 
-	include('includes/function.php');
+        $page_title = "Delete Product" ;
+   		include('includes/function.php');
+        include('includes/db.php');
 
-	include('includes/db.php');
+        //checkLogin();
 
+        if($_GET['book_id']) {
+            $book_id = $_GET['book_id'];
+        }
 
+            deleteProduct($conn, $book_id);
 
-
-	$id = getProductById($conn, $book_id);
-
-	$clean = array_map('trim',$id);
-
-	$delete = deleteProduct($conn, $clean);
-
-	if(isset($delete) == 1){
-
-	echo $delete;
-		
-	redirect("view_products.php");
-
-	}
-
-
-
-
-
-
+            redirect("view_products.php");
 
 ?>

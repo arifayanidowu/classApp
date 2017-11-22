@@ -312,16 +312,15 @@
 	}
 
 
-	function deleteProduct($dbconn){
-		$result = "";
+		function deleteProduct($dbconn, $input) {
 
-		$stmt = $dbconn->prepare("DELETE FROM books WHERE book_id =:bookID");
+		$stmt = $dbconn->prepare("DELETE FROM books WHERE book_id=:bookId ");
 
-		$stmt->bindParam(':bookID', $id);
+		$data = [
+			":bookId" => $input
+		];
 
-		$stmt->execute();
-
-		return $result; 
+		$stmt->execute($data);
 	}
 
 
