@@ -160,7 +160,7 @@
 					<option>Select Flag</option>
 					<?php foreach ($flag as $fl) {?>
 					<option value="<?php echo $fl ?>">
-						<?php echo $fl ?>
+						<?php echo $fl; ?>
 					</option>
 					<?php } ?>
 

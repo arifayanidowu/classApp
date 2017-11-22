@@ -31,6 +31,7 @@
 					<?php
 						$view = viewProducts($conn);
 						echo $view;
+
 					?>
 				</tbody>
 			</table>

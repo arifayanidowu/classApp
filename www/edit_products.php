@@ -36,13 +36,24 @@
 		if(empty($_POST['author'])){
 			$error['author'] = "Please enter author";
 		}
+		if(empty($_POST['price'])){
+			$error['price'] = "Please enter price";
+		}
+		if(empty($_POST['pub_date'])){
+			$error['pub_date'] = "Please enter publication date";
+		}
+		if(empty($_POST['cat'])){
+			$error['cat']= "Select a category";
+		}
 
 		if(empty($error)){
+
+		
 			$clean = array_map('trim', $_POST);
 
 			$clean['id'] = $book_id;
 
-			updateCategory($conn, $clean);
+			updateProduct($conn, $clean);
 
 			redirect("view_products.php");
 
@@ -106,31 +117,8 @@
 				</select>
 
 			</div>
-			<div>
-				<?php 
-					$info = displayErrors($error,'flag');
-					echo $info;
-				?>
-				<label>Flag:</label>
-				<select name="flag">
-					<option>Select Flag</option>
-					<?php foreach ($flag as $fl) {?>
-					<option value="<?php echo $fl ?>">
-						<?php echo $fl ?>
-					</option>
-					<?php } ?>
+			
 
-				</select>
-			</div>
-
-			<div>
-				<?php
-					$info = displayErrors($error, 'image');
-					echo $info;
-				?>
-				<label>Image:</label>
-				<input type="file" name="image">
-			</div>	
 
 			<p><input type="submit" name="edit" value="Edit"></p>
 		</form>

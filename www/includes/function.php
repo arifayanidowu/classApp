@@ -287,7 +287,9 @@
 
 		$stmt->execute();
 
-		$row = $stmt->fetch(PDO::FETCH_BOTH);
+		while($row = $stmt->fetch(PDO::FETCH_BOTH)){
+			$result .= $row[0];
+		}
 
 		return $row;
 	}
@@ -295,16 +297,31 @@
 
 	function updateProduct($dbconn, $input){
 
-		$stmt = $dbconn->prepare("UPDATE book SET title =:t, author=:a, publication_date=:pd, WHERE book_id =:bID AND title =:t");
+		$stmt = $dbconn->prepare("UPDATE books SET title =:t, author=:a, price=:p, publication_date=:pd, category_id=:cat WHERE book_id =:bID");
 
 		$data = [
 			":t" => $input['title'],
 			":bID" => $input['id'],
 			":a" => $input['author'],
-			":pd" => $input['pub_date']
+			":p" => $input['price'],
+			":pd" => $input['pub_date'],
+			":cat" => $input['cat']
 		];
 
 		$stmt->execute($data);
+	}
+
+
+	function deleteProduct($dbconn){
+		$result = "";
+
+		$stmt = $dbconn->prepare("DELETE FROM books WHERE book_id =:bookID");
+
+		$stmt->bindParam(':bookID', $id);
+
+		$stmt->execute();
+
+		return $result; 
 	}
 
 
