@@ -58,11 +58,17 @@
 		<h1 id="register-label">Admin Login</h1>
 		<hr>
 		<form id="register"  action ="login.php" method ="POST">
-			<div>			
+			<div>
+				<?php $data = displayErrors($error, 'email'); 
+					echo $data;
+				?>			
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>
 			<div>
+				<?php $data = displayErrors($error, 'password'); 
+					echo $data;
+				?>
 				<label>password:</label>
 				<input type="password" name="password" placeholder="password">
 			</div>
