@@ -174,6 +174,8 @@
 
 
 
+
+
 	function updateCategory($dbconn, $input){
 
 		$stmt = $dbconn->prepare("UPDATE category SET category_name =:catName WHERE category_id =:catID");
@@ -247,7 +249,13 @@
 		$stmt->execute();
 
 		while($row = $stmt->fetch(PDO::FETCH_BOTH)){
+			
+			if($val == $row[1]){
+				continue;
+			}
+
 			$result .= '<option value="'.$row[0].'">'.$row[1].'</option>';
+
 		}
 
 		return $result;
@@ -276,21 +284,18 @@
 
 	}
 
-
-
-	function getProductById($dbconn,$id){
-
+	function getProductById($dbconn, $id){
+		/*$result = "";*/	
 
 		$stmt = $dbconn->prepare("SELECT * FROM books WHERE book_id =:bookId");
 
-		$stmt->bindParam(':bookId',$id);
+		$stmt->bindParam('bookId', $id);
 
 		$stmt->execute();
 
-		while($row = $stmt->fetch(PDO::FETCH_BOTH)){
-			$result .= $row[0];
-		}
-
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+	/*	$result = $stmt->fetch(PDO::FETCH_BOTH);*/
+		/*return $result;*/
 		return $row;
 	}
 
@@ -312,7 +317,7 @@
 	}
 
 
-		function deleteProduct($dbconn, $input) {
+	function deleteProduct($dbconn, $input) {
 
 		$stmt = $dbconn->prepare("DELETE FROM books WHERE book_id=:bookId ");
 

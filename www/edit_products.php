@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	$page_title = "Edit Category";
+	$page_title = "Edit products";
 
 	include('includes/function.php');
 	
@@ -14,17 +14,13 @@
 
 	checkLogin();
 
-	define('MAX_FILE_SIZE', 2097152);
-
-	$ext = ['image/jpeg', 'image/jpg', 'image/png'];
-
-	$flag = ['Top-Selling', 'Trending', 'Recently-Viewed'];
-
 	if($_GET['book_id']){
 		$book_id = $_GET['book_id'];
 	}
 
 	$item = getProductById($conn, $book_id);
+	/*print_r($item); exit();  This is to know if getProductById fetched any ID*/
+	$category = getCategoryById($conn, $item[5]);
 
 	$error = [];
 
@@ -66,7 +62,7 @@
 <div class="wrapper">
 		<h1 id="register-label">Edit products</h1>
 		<hr>
-		<form id="register"  action ="" method ="POST" enctype="multipart/form-data">
+		<form id="register"  action ="" method ="POST">
 			<div>
 				<?php 
 				$info = displayErrors($error, 'title');
@@ -109,9 +105,9 @@
 				?>
 				<label>Category:</label> 
 				<select name="cat">
-					<option>Select Category</option>
+					<option><?php echo $category[1]; ?></option>
 					<?php
-						$data = fetchCategory($conn);
+						$data = fetchCategory($conn, $category[1]);
 						echo $data;
 					?>
 				</select>
@@ -122,6 +118,7 @@
 
 			<p><input type="submit" name="edit" value="Edit"></p>
 		</form>
+		<h4 class="jumpto">To edit product image <a href="edit_image.php">Click here</a></h4>
 	</div>
 
 <?php

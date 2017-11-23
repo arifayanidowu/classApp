@@ -5,7 +5,6 @@
    		include('includes/function.php');
         include('includes/db.php');
 
-        //checkLogin();
 
         if($_GET['book_id']) {
             $book_id = $_GET['book_id'];
