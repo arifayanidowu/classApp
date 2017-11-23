@@ -249,7 +249,7 @@
 		$stmt->execute();
 
 		while($row = $stmt->fetch(PDO::FETCH_BOTH)){
-			
+
 			if($val == $row[1]){
 				continue;
 			}
@@ -310,7 +310,8 @@
 			":a" => $input['author'],
 			":p" => $input['price'],
 			":pd" => $input['pub_date'],
-			":cat" => $input['cat']
+			":cat" => $input['cat'],
+			":bID" => $input['id']
 		];
 
 		$stmt->execute($data);
@@ -326,6 +327,19 @@
 		];
 
 		$stmt->execute($data);
+	}
+
+
+	function updateImage($dbconn, $id, $location){
+		$stmt = $dbconn->prepare("UPDATE books SET img_path = :img WHERE book_id = :bID");
+
+		$data = [
+			":img" => $location,
+			":bID" => $id
+		];
+
+		$stmt-> execute($data);
+
 	}
 
 

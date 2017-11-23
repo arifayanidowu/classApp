@@ -105,7 +105,7 @@
 				?>
 				<label>Category:</label> 
 				<select name="cat">
-					<option><?php echo $category[1]; ?></option>
+					<option value="<?php echo $category[0]; ?>"><?php echo $category[1]; ?></option>
 					<?php
 						$data = fetchCategory($conn, $category[1]);
 						echo $data;
@@ -118,7 +118,7 @@
 
 			<p><input type="submit" name="edit" value="Edit"></p>
 		</form>
-		<h4 class="jumpto">To edit product image <a href="edit_image.php">Click here</a></h4>
+		<h4 class="jumpto">To edit product image <a href="edit_image.php?img=<?php echo $book_id; ?>">Click here</a></h4>
 	</div>
 
 <?php
