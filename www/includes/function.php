@@ -63,31 +63,6 @@
 	}
 
 
-/*
-	function validateLogin($dbconn, $email, $password){
-		$result = "";
-
-		$stmt=$dbconn->prepare("SELECT * FROM admin WHERE :e=email");
-		$stmt->bindParam(":e", $email);
-		$stmt->execute();
-
-		while($fetch=$stmt->fetch(PDO::FETCH_ASSOC)){
-			$hash = $fetch['hash'];
-			if(password_verify($password, $hash)){
-				header("location:home.php");
-				$result = true;
-			} else{
-				$msg = "incorrect email/password";
-				header("location:login.php?msg=$msg");
-				$result = false;
-			}
-			return $result;
-
-		}
-
-
-	}*/
-
 
 	function adminLogin($dbconn, $input){
 
